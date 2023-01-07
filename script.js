@@ -92,7 +92,7 @@ var upperCasedCharacters = [
 function getPasswordOptions() {
   const options = {};
 
-  options.length = prompt("Enter Length (10-64): ");
+  options.length = parseInt(prompt("Enter Length (10-64): "));
   options.lowercase = confirm("Include Lowercase Characters?");
   options.uppercase = confirm("Include Uppercase Characters?");
   options.numeric = confirm("Include Numeric Characters?");
@@ -103,14 +103,41 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
+
+let bigArray = [];
+let generatedPassword = "";
 
 // Function to generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
 
+  // Make an array containing all selected character options
+  if(passwordOptions.lowercase) {
+    bigArray = bigArray.concat(lowerCasedCharacters);
+  }
+  if(passwordOptions.uppercase) {
+    bigArray = bigArray.concat(upperCasedCharacters);
+  }
+  if(passwordOptions.numeric) {
+    bigArray = bigArray.concat(numericCharacters);
+  }
+  if(passwordOptions.special) {
+    bigArray = bigArray.concat(specialCharacters);
+  }
+
+  // choose a random character from the bigArray bassed on the length the user selected
+  for(let i = 0; i < passwordOptions.length; i++) {
+    generatedPassword += getRandom(bigArray);
+  }
+
+  console.log(`Generated Password: ${generatedPassword}     IS ${generatedPassword.length} LONG`);
+  console.log(bigArray);
   console.log(passwordOptions);
+
+  return generatedPassword;
 }
 
 // Get references to the #generate element
