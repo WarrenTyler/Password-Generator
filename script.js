@@ -113,7 +113,7 @@ let generatedPassword = "";
 // Function to generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
-
+  
   // Make an array containing all selected character options
   if(passwordOptions.lowercase) {
     bigArray = bigArray.concat(lowerCasedCharacters);
@@ -127,12 +127,13 @@ function generatePassword() {
   if(passwordOptions.special) {
     bigArray = bigArray.concat(specialCharacters);
   }
-
+  
+  generatedPassword = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
     generatedPassword += getRandom(bigArray);
   }
-
+  
   console.log(`Generated Password: ${generatedPassword}     IS ${generatedPassword.length} LONG`);
   console.log(bigArray);
   console.log(passwordOptions);
@@ -147,7 +148,7 @@ const generateBtn = document.querySelector('#generate');
 function writePassword() {
   const password = generatePassword();
   const passwordText = document.querySelector('#password');
-
+  
   passwordText.value = password;
 }
 
