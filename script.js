@@ -107,12 +107,12 @@ function getRandom(arr) {
   return arr[randomIndex];
 }
 
-let bigArray = [];
-let generatedPassword = "";
 
 // Function to generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
+  let bigArray = [];
+  let generatedPassword = "";
   
   // Make an array containing all selected character options
   if(passwordOptions.lowercase) {
@@ -128,7 +128,6 @@ function generatePassword() {
     bigArray = bigArray.concat(specialCharacters);
   }
   
-  generatedPassword = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
     generatedPassword += getRandom(bigArray);
