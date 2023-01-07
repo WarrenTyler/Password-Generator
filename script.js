@@ -107,14 +107,10 @@ function getRandom(arr) {
   return arr[randomIndex];
 }
 
-
-// Function to generate password with user input
-function generatePassword() {
-  const passwordOptions = getPasswordOptions();
+// Function for getting an array containing all selected character options
+function getAllSelectedCharacters(passwordOptions) {
   let bigArray = [];
-  let generatedPassword = "";
-  
-  // Make an array containing all selected character options
+
   if(passwordOptions.lowercase) {
     bigArray = bigArray.concat(lowerCasedCharacters);
   }
@@ -127,17 +123,26 @@ function generatePassword() {
   if(passwordOptions.special) {
     bigArray = bigArray.concat(specialCharacters);
   }
+
+  return bigArray;
+}
+
+// Function to generate password with user input
+function generatePassword() {
+  const passwordOptions = getPasswordOptions();
+  const allSelectedCharacters = getAllSelectedCharacters(passwordOptions);
   
+  let password = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
-    generatedPassword += getRandom(bigArray);
+    password += getRandom(allSelectedCharacters);
   }
   
-  console.log(`Generated Password: ${generatedPassword}     IS ${generatedPassword.length} LONG`);
-  console.log(bigArray);
+  console.log(`Generated Password: ${password}     IS ${password.length} LONG`);
+  console.log(allSelectedCharacters);
   console.log(passwordOptions);
 
-  return generatedPassword;
+  return password;
 }
 
 // Get references to the #generate element
