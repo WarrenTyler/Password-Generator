@@ -98,17 +98,34 @@ function getValidPasswordLength(min, max) {
   return length;
 }
 
+function getValidCharacterOptions() {
+  const characterOptions = {};
+  
+  do {
+	  characterOptions.lowercase = confirm("Include Lowercase Characters?");
+	  characterOptions.uppercase = confirm("Include Uppercase Characters?");
+	  characterOptions.numeric = confirm("Include Numeric Characters?");
+	  characterOptions.special = confirm("Include Special Characters?");
+  } while (! Object.values(characterOptions).includes(true));
+  
+  return characterOptions;
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-  const options = {};
+  // const options = {};
 
-  options.length = getValidPasswordLength(10, 64);
-  options.lowercase = confirm("Include Lowercase Characters?");
-  options.uppercase = confirm("Include Uppercase Characters?");
-  options.numeric = confirm("Include Numeric Characters?");
-  options.special = confirm("Include Special Characters?");
+  // options.length = getValidPasswordLength(10, 64);
+  // options.lowercase = confirm("Include Lowercase Characters?");
+  // options.uppercase = confirm("Include Uppercase Characters?");
+  // options.numeric = confirm("Include Numeric Characters?");
+  // options.special = confirm("Include Special Characters?");
   
-  return options;
+  // return options;
+  return {
+    length: getValidPasswordLength(10, 64),
+    ...getValidCharacterOptions()
+  }
 }
 
 // Function for getting a random element from an array
