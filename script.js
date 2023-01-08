@@ -88,11 +88,21 @@ const upperCasedCharacters = [
   'Z'
 ];
 
+function getValidPasswordLength(min, max) {
+  let length = 0;
+
+  do {
+    length = parseInt(prompt("Enter Length (10-64): ")) || length;
+  } while (length < min || length > max);
+
+  return length;
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
   const options = {};
 
-  options.length = parseInt(prompt("Enter Length (10-64): "));
+  options.length = getValidPasswordLength(10, 64);
   options.lowercase = confirm("Include Lowercase Characters?");
   options.uppercase = confirm("Include Uppercase Characters?");
   options.numeric = confirm("Include Numeric Characters?");
