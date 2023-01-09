@@ -125,7 +125,6 @@ function getValidCharacterOptions() {
   return characterOptions;
 }
 
-// Function to prompt user for password options
 function getPasswordOptions() {
 
   return {
