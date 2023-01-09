@@ -119,15 +119,6 @@ function getValidCharacterOptions() {
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  // const options = {};
-
-  // options.length = getValidPasswordLength(10, 64);
-  // options.lowercase = confirm("Include Lowercase Characters?");
-  // options.uppercase = confirm("Include Uppercase Characters?");
-  // options.numeric = confirm("Include Numeric Characters?");
-  // options.special = confirm("Include Special Characters?");
-  
-  // return options;
   return {
     length: getValidPasswordLength(10, 64),
     ...getValidCharacterOptions()
@@ -179,8 +170,6 @@ function generatePassword() {
   return password;
 }
 
-// Get references to the #generate element
-const generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
@@ -190,5 +179,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// Get references to the #generate element
+const generateBtn = document.querySelector('#generate');
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
