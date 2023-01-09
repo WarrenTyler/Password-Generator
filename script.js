@@ -179,13 +179,11 @@ function getRandomPassword(passwordOptions, allSelectedCharacters) {
 // Function to generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
-  const allSelectedCharacters = getAllSelectedCharacters(passwordOptions);
-  
-  
-  console.log(allSelectedCharacters);
-  console.log(passwordOptions);
 
-  return getRandomPassword(passwordOptions, allSelectedCharacters);
+  return getRandomPassword(
+    passwordOptions, 
+    getAllSelectedCharacters(passwordOptions)
+  );
 }
 
 
