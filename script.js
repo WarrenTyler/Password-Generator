@@ -92,7 +92,8 @@ function getValidPasswordLength(min, max) {
   let length = 0;
 
   do {
-    length = parseInt(prompt("Enter Length (10-64): ")) || length;
+    // use short circuit evaluation to populate value of length
+    length = parseInt(prompt("Enter Length of Password (Min: 10, Max: 64): ")) || length;
   } while (length < min || length > max);
 
   return length;
@@ -103,14 +104,15 @@ function getValidCharacterOptions() {
   let message = "";
 
   do {
-    // only alert the user if they didn't include a character type
+    // only alert the user if they didn't include a character type using short circuit conditional
     message && alert(message);
 
-	  characterOptions.lowercase = confirm("Include Lowercase Characters?");
-	  characterOptions.uppercase = confirm("Include Uppercase Characters?");
-	  characterOptions.numeric = confirm("Include Numeric Characters?");
-	  characterOptions.special = confirm("Include Special Characters?");
+	  characterOptions.lowercase = confirm("Include Lowercase Characters (OK to include, Cancel to ignore)?");
+	  characterOptions.uppercase = confirm("Include Uppercase Characters (OK to include, Cancel to ignore)?");
+	  characterOptions.numeric = confirm("Include Numeric Characters (OK to include, Cancel to ignore)?");
+	  characterOptions.special = confirm("Include Special Characters (OK to include, Cancel to ignore)?");
 
+    // message now becomes truthy and will be displayed to user next iteration
     message = "You must select at least one character type from the following options";
   } while (! Object.values(characterOptions).includes(true));
   
@@ -152,22 +154,27 @@ function getAllSelectedCharacters(passwordOptions) {
   return bigArray;
 }
 
-// Function to generate password with user input
-function generatePassword() {
-  const passwordOptions = getPasswordOptions();
-  const allSelectedCharacters = getAllSelectedCharacters(passwordOptions);
-  
+function getRandomPassword(passwordOptions, allSelectedCharacters) {
   let password = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
     password += getRandom(allSelectedCharacters);
   }
-  
+
   console.log(`Generated Password: ${password}     IS ${password.length} LONG`);
+  return password;
+}
+
+// Function to generate password with user input
+function generatePassword() {
+  const passwordOptions = getPasswordOptions();
+  const allSelectedCharacters = getAllSelectedCharacters(passwordOptions);
+  
+  
   console.log(allSelectedCharacters);
   console.log(passwordOptions);
 
-  return password;
+  return getRandomPassword(passwordOptions, allSelectedCharacters);
 }
 
 
