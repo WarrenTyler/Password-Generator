@@ -88,12 +88,18 @@ const upperCasedCharacters = [
   'Z'
 ];
 
+const passwordRange = {
+  min: 10,
+  max: 64
+}
+
 function getValidPasswordLength(min, max) {
   let length = 0;
 
   do {
+    const message = `Enter Length of Password (Min: ${passwordRange.min}, Max: ${passwordRange.max}): `
     // use short circuit evaluation to populate value of length
-    length = parseInt(prompt("Enter Length of Password (Min: 10, Max: 64): ")) || length;
+    length = parseInt(prompt(message)) || length;
   } while (length < min || length > max);
 
   return length;
@@ -122,7 +128,7 @@ function getValidCharacterOptions() {
 // Function to prompt user for password options
 function getPasswordOptions() {
   return {
-    length: getValidPasswordLength(10, 64),
+    length: getValidPasswordLength(passwordRange.min, passwordRange.max),
     ...getValidCharacterOptions()
   }
 }
