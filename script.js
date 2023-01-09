@@ -127,17 +127,22 @@ function getValidCharacterOptions() {
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+
   return {
     length: getValidPasswordLength(passwordRange.min, passwordRange.max),
     ...getValidCharacterOptions()
   }
 }
 
-// Function for getting a random element from an array
-function getRandom(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
+function getRandomIndex(arr) {
 
-  return arr[randomIndex];
+  return Math.floor(Math.random() * arr.length);
+}
+
+// Function for getting a random element from an array
+function getRandomCharacter(arr) {
+
+  return arr[getRandomIndex(arr)];
 }
 
 // Function for getting an array containing all selected character options
@@ -164,8 +169,7 @@ function getRandomPassword(passwordOptions, allSelectedCharacters) {
   let password = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
-    const randomIndex = Math.floor(Math.random() * allSelectedCharacters.length);
-    password += getRandom(allSelectedCharacters[randomIndex]);
+    password += getRandomCharacter(allSelectedCharacters[getRandomIndex(allSelectedCharacters)]);
   }
 
   console.log(`Generated Password: ${password}     IS ${password.length} LONG`);
