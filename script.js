@@ -129,36 +129,37 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  let randomIndex = Math.floor(Math.random() * arr.length);
+  const randomIndex = Math.floor(Math.random() * arr.length);
 
   return arr[randomIndex];
 }
 
 // Function for getting an array containing all selected character options
 function getAllSelectedCharacters(passwordOptions) {
-  let bigArray = [];
+  const selectedCharacterArrays = [];
 
   if(passwordOptions.lowercase) {
-    bigArray = bigArray.concat(lowerCasedCharacters);
+    selectedCharacterArrays.push(lowerCasedCharacters);
   }
   if(passwordOptions.uppercase) {
-    bigArray = bigArray.concat(upperCasedCharacters);
+    selectedCharacterArrays.push(upperCasedCharacters);
   }
   if(passwordOptions.numeric) {
-    bigArray = bigArray.concat(numericCharacters);
+    selectedCharacterArrays.push(numericCharacters);
   }
   if(passwordOptions.special) {
-    bigArray = bigArray.concat(specialCharacters);
+    selectedCharacterArrays.push(specialCharacters);
   }
 
-  return bigArray;
+  return selectedCharacterArrays;
 }
 
 function getRandomPassword(passwordOptions, allSelectedCharacters) {
   let password = "";
   // choose a random character from the bigArray bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
-    password += getRandom(allSelectedCharacters);
+    const randomIndex = Math.floor(Math.random() * allSelectedCharacters.length);
+    password += getRandom(allSelectedCharacters[randomIndex]);
   }
 
   console.log(`Generated Password: ${password}     IS ${password.length} LONG`);
