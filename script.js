@@ -100,12 +100,18 @@ function getValidPasswordLength(min, max) {
 
 function getValidCharacterOptions() {
   const characterOptions = {};
-  
+  let message = "";
+
   do {
+    // only alert the user if they didn't include a character type
+    message && alert(message);
+
 	  characterOptions.lowercase = confirm("Include Lowercase Characters?");
 	  characterOptions.uppercase = confirm("Include Uppercase Characters?");
 	  characterOptions.numeric = confirm("Include Numeric Characters?");
 	  characterOptions.special = confirm("Include Special Characters?");
+
+    message = "You must select at least one character type from the following options";
   } while (! Object.values(characterOptions).includes(true));
   
   return characterOptions;
@@ -131,6 +137,7 @@ function getPasswordOptions() {
 // Function for getting a random element from an array
 function getRandom(arr) {
   let randomIndex = Math.floor(Math.random() * arr.length);
+
   return arr[randomIndex];
 }
 
