@@ -107,19 +107,15 @@ function getValidPasswordLength(min, max) {
 
 function getValidCharacterOptions() {
   const characterOptions = {};
-  let message = "";
 
   do {
-    // only alert the user if they didn't include a character type using short circuit conditional
-    message && alert(message);
+    alert("You must select at least one character type from the following options");
 
 	  characterOptions.lowercase = confirm("Include Lowercase Characters (OK to include, Cancel to ignore)?");
 	  characterOptions.uppercase = confirm("Include Uppercase Characters (OK to include, Cancel to ignore)?");
 	  characterOptions.numeric = confirm("Include Numeric Characters (OK to include, Cancel to ignore)?");
 	  characterOptions.special = confirm("Include Special Characters (OK to include, Cancel to ignore)?");
 
-    // message now becomes truthy and will be displayed to user next iteration
-    message = "You must select at least one character type from the following options";
   } while (! Object.values(characterOptions).includes(true));
   
   return characterOptions;
@@ -138,13 +134,12 @@ function getRandomIndex(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
-// Function for getting a random element from an array
 function getRandomCharacter(arr) {
 
   return arr[getRandomIndex(arr)];
 }
 
-// Function for getting an array containing all selected character options
+// returns a 2D array containing all selected character option arrays
 function getAllSelectedCharacters(passwordOptions) {
   const selectedCharacterArrays = [];
 
@@ -166,16 +161,18 @@ function getAllSelectedCharacters(passwordOptions) {
 
 function getRandomPassword(passwordOptions, allSelectedCharacters) {
   let password = "";
-  // choose a random character from the bigArray bassed on the length the user selected
+  // generate a string of random character bassed on the length the user selected
   for(let i = 0; i < passwordOptions.length; i++) {
+    // randomly select a character array to choose a random character from.
+    // this should increase the chances of including at least one character 
+    // from each of the selected character arrays.
     password += getRandomCharacter(allSelectedCharacters[getRandomIndex(allSelectedCharacters)]);
   }
 
-  console.log(`Generated Password: ${password}     IS ${password.length} LONG`);
   return password;
 }
 
-// Function to generate password with user input
+// generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
 
